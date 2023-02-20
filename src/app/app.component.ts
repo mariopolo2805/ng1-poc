@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ListService } from './list.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,11 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'poc-ng';
+  list: { name: string; image: string }[] = [];
+
+  constructor(private listService: ListService) { }
+
+  ngOnInit(): void {
+    this.listService.getList().subscribe((list) => this.list = list);
+  }
 }
